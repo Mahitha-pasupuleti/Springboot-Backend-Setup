@@ -1,14 +1,19 @@
 package com.apigateway.Controller;
 
+import com.apigateway.Entity.JwtService;
 import com.apigateway.Entity.User;
 import com.apigateway.Entity.UserRequest;
 import com.apigateway.Entity.UserResponse;
 import com.apigateway.Mapper.UserMapper;
 import com.apigateway.Service.UserService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +25,9 @@ public class UserRegistrationController {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private JwtService jwtService;
 
     @PostMapping("/registerUser") // all can access
     public ResponseEntity<UserResponse> registerNewUser(@RequestBody UserRequest userRequest) {
@@ -34,6 +42,15 @@ public class UserRegistrationController {
     public ResponseEntity<User> findAUserByUserId(@PathVariable Long id) {
         User user = userService.findUserById(id);
         return ResponseEntity.status(HttpStatus.FOUND).body(user);
+    }
+
+    @GetMapping("/username")
+    public ResponseEntity<UserResponse> getUserByUsername(@RequestHeader("Authorization") String token) {
+        token = token.substring(7);
+        String username = jwtService.extractUsername(token);
+        User user = userService.findUserByUsername( username );
+        UserResponse userResponse = userMapper.convertUserToResponse( user );
+        return ResponseEntity.ok(userResponse);
     }
 
 }

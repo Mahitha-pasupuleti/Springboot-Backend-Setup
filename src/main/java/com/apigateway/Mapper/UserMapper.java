@@ -27,7 +27,8 @@ public class UserMapper {
         UserResponse userResponse = new UserResponse();
         userResponse.setUsername( user.getUsername() );
         userResponse.setEmail( user.getEmail() );
-        userResponse.setMessage( "User Registration Successful!" );
+        userResponse.setRole( user.getRole() );
+        userResponse.setMessage( "User registration successful!" );
         return userResponse;
     }
 
