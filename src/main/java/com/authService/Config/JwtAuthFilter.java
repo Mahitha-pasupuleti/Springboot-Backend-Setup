@@ -1,6 +1,6 @@
 package com.authService.Config;
 
-import com.authService.Entity.JwtService;
+import com.authService.Service.JwtService;
 import com.authService.Service.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

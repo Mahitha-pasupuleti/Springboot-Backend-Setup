@@ -1,5 +1,6 @@
-package com.authService.Entity;
+package com.authService.Request;
 
+import com.authService.Entity.UserRole;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;

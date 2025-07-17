@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -21,5 +20,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
     private String refreshToken;
-
 }

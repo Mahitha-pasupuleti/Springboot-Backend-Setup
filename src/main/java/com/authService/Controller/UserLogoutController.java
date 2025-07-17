@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/logout")
+@RequestMapping("/api/v1/university")
 public class UserLogoutController {
 
-    @PostMapping
+    @PostMapping("/logout")
     public ResponseEntity<String> logoutUser(HttpServletRequest request, HttpServletResponse response) {
         Cookie[] cookies = request.getCookies();
         if ( cookies != null ) {

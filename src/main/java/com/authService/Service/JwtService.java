@@ -1,5 +1,6 @@
-package com.authService.Entity;
+package com.authService.Service;
 
+import com.authService.Entity.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -20,16 +21,18 @@ public class JwtService {
 
     // Generate Jwt Tokens
 
-    public String generateAccessToken(String username, String email, UserRole role) {
+    public String generateAccessToken(Long userId, String username, String email, UserRole role) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
         claims.put("username", username);
         claims.put("email", email);
         claims.put("role", role.toString());
         return createAccessToken(claims, username, 1000*60*15);
     }
 
-    public String generateRefreshToken(String username, String email, UserRole role) {
+    public String generateRefreshToken(Long userId, String username, String email, UserRole role) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", userId);
         claims.put("username", username);
         claims.put("email", email);
         claims.put("role", role.toString());
@@ -68,6 +71,10 @@ public class JwtService {
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims.SUBJECT, String.class);
+    }
+
+    public Long extractUserId(String token) {
+        return extractClaim(token, "userId", Long.class);
     }
 
     public Date extractExpiration(String token) {

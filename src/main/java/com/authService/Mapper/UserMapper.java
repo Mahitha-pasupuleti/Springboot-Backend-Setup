@@ -1,8 +1,8 @@
 package com.authService.Mapper;
 
 import com.authService.Entity.User;
-import com.authService.Entity.UserRequest;
-import com.authService.Entity.UserResponse;
+import com.authService.Request.UserRequest;
+import com.authService.Response.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

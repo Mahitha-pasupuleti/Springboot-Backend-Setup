@@ -1,6 +1,6 @@
 package com.authService.Mapper;
 
-import com.authService.Entity.LoginResponse;
+import com.authService.Response.LoginResponse;
 import com.authService.Entity.User;
 import org.springframework.stereotype.Component;
 

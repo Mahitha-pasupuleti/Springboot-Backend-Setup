@@ -1,6 +1,6 @@
 package com.authService.Service;
 
-import com.authService.Entity.CustomUserDetails;
+import com.authService.DTO.CustomUserDetails;
 import com.authService.Entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

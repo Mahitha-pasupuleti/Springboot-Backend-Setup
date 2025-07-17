@@ -1,9 +1,9 @@
 package com.authService.Controller;
 
 import com.authService.CustomExceptions.IncorrectPasswordException;
-import com.authService.Entity.JwtService;
-import com.authService.Entity.LoginRequest;
-import com.authService.Entity.LoginResponse;
+import com.authService.Service.JwtService;
+import com.authService.Request.LoginRequest;
+import com.authService.Response.LoginResponse;
 import com.authService.Entity.User;
 import com.authService.Mapper.LoginMapper;
 import com.authService.Service.UserService;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/login")
+@RequestMapping("/api/v1/university")
 public class UserLoginController {
 
     @Autowired
@@ -35,7 +35,7 @@ public class UserLoginController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<?> loginExistingUser(HttpServletRequest request, HttpServletResponse response, @RequestBody LoginRequest loginRequest) {
         return refreshTokens(request, response, loginRequest);
     }
@@ -48,8 +48,8 @@ public class UserLoginController {
             throw new IncorrectPasswordException("Incorrect Password. Please try again!");
         }
 
-        String refreshToken = jwtService.generateRefreshToken( user.getUsername(), user.getEmail(), user.getRole() );
-        String accessToken = jwtService.generateAccessToken( user.getUsername(), user.getEmail(), user.getRole() );
+        String refreshToken = jwtService.generateRefreshToken( user.getUserId(), user.getUsername(), user.getEmail(), user.getRole() );
+        String accessToken = jwtService.generateAccessToken( user.getUserId(), user.getUsername(), user.getEmail(), user.getRole() );
 
         Cookie accessTokenCookie = new Cookie("accessToken", accessToken);
         accessTokenCookie.setHttpOnly(true);

@@ -1,4 +1,4 @@
-package com.authService.Entity;
+package com.authService.Request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
